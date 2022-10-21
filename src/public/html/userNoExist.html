@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>CIMA UserNonE</title>
+</head>
+<body>
+<div class=centerBoxEmail>
+    <div class="UserContainer">
+        <h1 class="title">Sorry, user doesn't exist</h1>
+        <p class="subtitle">Please, create an account to enjoy our services</p>
+        <div class="dangerImage">
+            <img src="../resources/danger.jpg" alt="danger" width="300" height="300">
+        </div>
+        <button class="SignIn-button" onclick="goToSignIn()">Sign in</button>
+    </div>
+</div>
+<script>
+    const dev = "http://localhost:8100/api/v1/static/";
+    const prod = "https://miquelortiz7e4.alwaysdata.net/api/v1/static/";
+    function goToSignIn(){
+        window.location.replace(prod+"html/Login.html")
+    }
+</script>
+</body>
+</html>

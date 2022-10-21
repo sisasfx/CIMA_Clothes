@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css"/>
+    <title>AddProduct</title>
+</head>
+<body>
+
+<div class="containerAddProduct">
+    <form action="/uploads" enctype="multipart/form-data" method="POST" id="formPostProduct">
+<!--        <input id="user" type="text" name="user" accept="multipart/form-data"/>-->
+        <label for="fileImage"><strong>Image</strong></label>
+        <input type="file" id="fileImage" name="myImage" accept="image/*" />
+
+        <label for="userAdd"><strong>User name</strong></label>
+        <input type="text" id="userAdd" placeholder="mikeCima">
+
+        <label for="emailAdd"><strong>User Email</strong></label>
+        <input type="email" id="emailAdd" placeholder="cima@gmail.com">
+
+        <label for="genderAdd"><strong>Gender</strong></label>
+        <select id="genderAdd" name="gender">
+            <option value="man">man</option>
+            <option value="woman">woman</option>
+            <option value="kid">kid</option>
+        </select>
+
+        <label for="productName"><strong>Product Name</strong></label>
+        <input type="text" id="productName">
+
+        <label for="description"><strong>Description</strong></label>
+        <textarea id="description"></textarea>
+
+        <label for="priceProduct"><strong>Price</strong></label>
+        <input type="number" id="priceProduct">
+
+        <input type="submit" id="botonSubmit" value="Upload Product"/>
+    </form>
+
+</div>
+<script>
+    const dev = "http://localhost:8100/api/v1/static/";
+    const prod = "https://miquelortiz7e4.alwaysdata.net/api/v1/static/";
+
+    const formu = document.getElementById("formPostProduct");
+    formu.addEventListener("submit",postProduct);
+
+    async function postProduct(event){
+        event.preventDefault();
+        const username = document.getElementById("userAdd").value;
+        const useremail = document.getElementById("emailAdd").value;
+        const gender = document.getElementById("genderAdd").value;
+        const product = document.getElementById("productName").value;
+        const description = document.getElementById("description").value;
+        const price = document.getElementById("priceProduct").value;
+        const image = document.getElementById("fileImage").files[0];
+
+
+        const formdata = new FormData();
+
+        formdata.append("file", image);
+        formdata.append("user", username);
+        formdata.append("email",useremail)
+        formdata.append("gender", gender);
+        formdata.append("product", product);
+        formdata.append("description", description);
+        formdata.append("price", price);
+
+        let requestOptions = {
+            method: 'POST',
+            body: formdata,
+            redirect: 'follow'
+        };
+
+        fetch(prod+"addProduct", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .then(window.location.replace(prod+"html/index.html"))
+            .catch(error => console.log('error', error))
+    }
+</script>
+</body>
+</html>
